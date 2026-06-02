@@ -2,6 +2,17 @@
 
 Simple container-based cloud computing project. The application is a small internal helpdesk where users can submit and delete IT issue reports.
 
+## Dashboard Screenshot
+
+![Grafana Dashboard](docs/grafana-dashboard.png)
+
+Example dashboard content:
+- app availability
+- database and Redis status
+- total tickets
+- page visits
+- deleted tickets over time
+
 ## Stack
 
 - Nginx as reverse proxy
