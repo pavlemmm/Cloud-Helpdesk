@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud Helpdesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <p class="eyebrow">Cloud Helpdesk</p>
+        <h1>Interna aplikacija za prijavu i praćenje IT problema</h1>
+        <p class="subtitle">
+          Helpdesk sistem za firmu sa Flask aplikacijom,
+          PostgreSQL bazom, Redis i Prometheus/Grafana monitoringom
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Prijavi novi problem</h2>
+        <form action="/add-task" method="POST" class="task-form">
+          <input
+            type="text"
+            name="title"
+            placeholder="Na primer: Ne radi internet u sali za sastanke"
+            required
+          />
+          <button type="submit">Pošalji prijavu</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Otvorene prijave</h2>
+          <span>Lista trenutno evidentiranih problema</span>
+        </div>
+        <ul class="task-list">
+          {% for ticket in tickets %}
+          <li>
+            <div class="task-info">
+              <span class="task-id">#{{ ticket[0] }}</span>
+              <span>{{ ticket[1] }}</span>
+            </div>
+            <form action="/delete-task/{{ ticket[0] }}" method="POST">
+              <button type="submit" class="delete-button">Obriši</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
